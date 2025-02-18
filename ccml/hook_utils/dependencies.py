@@ -19,6 +19,9 @@ basic = [
     "scikit-image",
     "einops",
     "opt_einsum",
+    "wandb",
+    "torch",
+    "torchvision",
 ]
 
 scaffold = [
@@ -33,7 +36,7 @@ def write_dependencies(
 ):
     if dependencies == "requirements.txt":
         with open(dependencies, "w") as f:
-            lines = sorted(packages)
+            lines = packages
 
             lines += ["" "-e ."]
 

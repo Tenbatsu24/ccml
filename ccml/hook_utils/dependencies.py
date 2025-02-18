@@ -9,7 +9,7 @@ packages = [
 ]
 
 basic = [
-    "numpy==1.26.4"
+    "numpy==1.26.4",
     "ipython",
     "jupyterlab",
     "matplotlib",

@@ -43,33 +43,6 @@ lint:
 format:
 	black --config pyproject.toml {{ cookiecutter.module_name }}
 
-{% if not cookiecutter.dataset_storage.none %}
-## Download Data from storage system
-.PHONY: sync_data_down
-sync_data_down:
-	{% if cookiecutter.dataset_storage.s3 -%}
-	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/ \
-		data/ {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
-	{% elif cookiecutter.dataset_storage.azure -%}
-	az storage blob download-batch -s {{ cookiecutter.dataset_storage.azure.container }}/data/ \
-		-d data/
-	{% elif cookiecutter.dataset_storage.gcs -%}
-	gsutil -m rsync -r gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/ data/
-	{% endif %}
-
-## Upload Data to storage system
-.PHONY: sync_data_up
-sync_data_up:
-	{% if cookiecutter.dataset_storage.s3 -%}
-	aws s3 sync data/ \
-		s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
-	{% elif cookiecutter.dataset_storage.azure -%}
-	az storage blob upload-batch -d {{ cookiecutter.dataset_storage.azure.container }}/data/ \
-		-s data/
-	{% elif cookiecutter.dataset_storage.gcs -%}
-	gsutil -m rsync -r data/ gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/
-	{% endif %}
-{% endif %}
 
 {% if cookiecutter.environment_manager != 'none' %}
 ## Set up python interpreter environment
@@ -92,6 +65,13 @@ create_environment:
 {% endif %}
 
 
+.PHONY: setup_hooks
+setup_hooks:
+	pre-commit install
+	nbautoexport install
+	nbautoexport configure notebooks
+
+
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
@@ -99,7 +79,7 @@ create_environment:
 {% if cookiecutter.include_code_scaffold == 'Yes' %}
 ## Make Dataset
 .PHONY: data
-data: requirements
+data:
 	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
 {% endif %}
 

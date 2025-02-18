@@ -5,5 +5,4 @@ if sys.version_info[:2] >= (3, 8):
 else:
     import importlib_metadata
 
-
 __version__ = importlib_metadata.version("cookiecutter-data-science")

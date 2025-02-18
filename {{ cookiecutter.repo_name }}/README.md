@@ -12,6 +12,10 @@
     <img src="https://img.shields.io/badge/PyTorch-2.6.0-EE4C2C.svg?style=flat&logo=pytorch" />
 </a>
 
+<a target="_blank" href="https://wandb.ai/">
+    <img src="https://img.shields.io/badge/wandb-FFCC33.svg?style=flat&logo=WeightsAndBiases&logoColor=black" />
+</a>
+
 <a target="_blank" href="https://lightning.ai/">
     <img src="https://img.shields.io/badge/-Lightning-792ee5?logo=lightning&logoColor=white" />
 </a>

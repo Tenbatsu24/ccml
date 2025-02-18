@@ -3,19 +3,17 @@ import jinja2
 
 jinja2.StrictUndefined = jinja2.Undefined
 
-
 # Monkey-patch cookiecutter to allow sub-items
 from cookiecutter import prompt
 
-from ccds.monkey_patch import prompt_for_config
+from ccml.monkey_patch import prompt_for_config
 
 prompt.prompt_for_config = prompt_for_config
-
 
 # monkey-patch context to point to ccds.json
 from cookiecutter import generate
 
-from ccds.monkey_patch import generate_context_wrapper
+from ccml.monkey_patch import generate_context_wrapper
 
 generate.generate_context = generate_context_wrapper
 
@@ -23,7 +21,7 @@ generate.generate_context = generate_context_wrapper
 from cookiecutter import cli
 from cookiecutter import main as api_main  # noqa: F401 referenced by tests
 
-from ccds.version import __version__
+from ccml.version import __version__
 
 
 def default_ccds_main(f):
@@ -31,7 +29,7 @@ def default_ccds_main(f):
 
     def _main(*args, **kwargs):
         f.params[1].default = (
-            "https://github.com/drivendataorg/cookiecutter-data-science"
+            "https://github.com/Tenbatsu24/ccml"
         )
         # Find the "checkout" option in the cookiecutter cli (currently the fifth)
         # Per #389, set this to the currently released version by default
@@ -44,7 +42,6 @@ def default_ccds_main(f):
 
 
 main = default_ccds_main(cli.main)
-
 
 if __name__ == "__main__":
     main()

@@ -27,7 +27,7 @@ jobs:
         id: version
         run: |
           echo "Release tag: [${{ github.event.release.tag_name }}]"
-          PACKAGE_VERSION=$(python -c "import ccds; print(ccds.__version__)")
+          PACKAGE_VERSION=$(python -c "import ccml; print(ccml.__version__)")
           echo "Package version: [$PACKAGE_VERSION]"
           [ ${{ github.event.release.tag_name }} == "v$PACKAGE_VERSION" ] || { exit 1; }
           echo "::set-output name=major_minor_version::v${PACKAGE_VERSION%.*}"
@@ -35,7 +35,7 @@ jobs:
       - name: Build package
         run: |
           make dist
-          
+
       - name: Publish to Test PyPI
         uses: pypa/gh-action-pypi-publish@v1.3.0
         with:

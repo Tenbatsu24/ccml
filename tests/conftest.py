@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from ccds.__main__ import api_main
+from ccml.__main__ import api_main
 
 CCDS_ROOT = Path(__file__).parents[1].resolve()
 

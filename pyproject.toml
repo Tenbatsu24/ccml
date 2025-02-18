@@ -6,11 +6,11 @@ build-backend = "flit_core.buildapi"
 name = "ccds"
 
 [project]
-name = "cookiecutter-data-science"
-version = "2.0.0"
-description = "A logical, reasonably standardized but flexible project structure for doing and sharing data science work."
+name = "cookiecutter-machine-learning"
+version = "1.0.0"
+description = "A logical, reasonably standardized but flexible project structure for doing and sharing machine learning."
 authors = [
-  { name = "DrivenData", email = "info@drivendata.org" },
+  { name = "Tenbatsu24", email = "" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"

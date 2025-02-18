@@ -10,6 +10,7 @@ PYTHON_INTERPRETER = python
 # COMMANDS                                                                      #
 #################################################################################
 
+
 {% if cookiecutter.dependency_file != 'none' %}
 ## Install Python Dependencies
 .PHONY: requirements
@@ -31,12 +32,14 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
+
 ## Lint using flake8 and black (use `make format` to do formatting)
 .PHONY: lint
 lint:
 	flake8 {{ cookiecutter.module_name }}
 	isort --check --diff --profile black {{ cookiecutter.module_name }}
 	black --check --config pyproject.toml {{ cookiecutter.module_name }}
+
 
 ## Format source code with black
 .PHONY: format
@@ -67,9 +70,14 @@ create_environment:
 
 .PHONY: setup_hooks
 setup_hooks:
-	pre-commit install
-	nbautoexport install
-	nbautoexport configure notebooks
+	@if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then \
+		pre-commit install; \
+		pre-commit autoupdate --repo https://github.com/pre-commit/pre-commit-hooks; \
+		nbautoexport install; \
+		nbautoexport configure notebooks; \
+	else \
+		echo "Not inside a Git repository. Skipping pre-commit setup."; \
+	fi
 
 
 #################################################################################

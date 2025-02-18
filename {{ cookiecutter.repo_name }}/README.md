@@ -4,7 +4,63 @@
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
 
+<a target="_blank" href="https://python.org/">
+    <img src="https://img.shields.io/badge/Python-3.10-3776AB.svg?style=flat&logo=python&logoColor=white" />
+</a>
+
+<a target="_blank" href="https://pytorch.org/">
+    <img src="https://img.shields.io/badge/PyTorch-2.6.0-EE4C2C.svg?style=flat&logo=pytorch" />
+</a>
+
+<a target="_blank" href="https://lightning.ai/">
+    <img src="https://img.shields.io/badge/-Lightning-792ee5?logo=lightning&logoColor=white" />
+</a>
+
+<a target="_blank" href="https://pre-commit.com/">
+    <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=yellow" />
+</a>
+
+<a target="_blank" href="https://black.readthedocs.io/en/stable/">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" />
+</a>
+
+
 {{cookiecutter.description}}
+
+## Installation
+
+The project requires the following dependencies:
+
+- Python 3.10
+- conda
+- make
+
+For installation from scratch, run the following command:
+
+```bash
+make env
+```
+
+This will create a conda environment called `{{cookiecutter.project_name}}` and install all the required dependencies.
+
+If you already have a conda environment `(env_name)`, you can install the dependencies using the following command:
+```bash
+conda activate (env_name)
+make requirements
+```
+
+Fill the `.env` file with the appropriate values.
+```bash
+touch .env
+echo "MODELS_DIR=" >> .env  # Directory to save models
+echo "WANDB_API_KEY=" >> .env
+echo "WANDB_ENTITY=" >> .env
+echo "WANDB_PROJECT={{cookiecutter.project_name}}" >> .env
+```
+
+🚨 **Do not push the `.env` file to the repository.**
+
+--------
 
 ## Project Organization
 
@@ -43,19 +99,7 @@
     │
     ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
     │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    └── plots.py                <- Code to create visualizations
+    └──  config.py               <- Store useful variables and configuration
 ```
 
 --------
-

@@ -1,19 +1,24 @@
 packages = [
+    "pip",
     "black",
     "flake8",
     "isort",
-    "pip",
     "python-dotenv",
+    "pre-commit",
+    "nbautoexport",
 ]
 
 basic = [
+    "numpy==1.26.4"
     "ipython",
     "jupyterlab",
     "matplotlib",
     "notebook",
-    "numpy",
     "pandas",
     "scikit-learn",
+    "scikit-image",
+    "einops",
+    "opt_einsum",
 ]
 
 scaffold = [
@@ -50,16 +55,5 @@ def write_dependencies(
             lines += ["  - pip:"]
             lines += [f"    - {p}" for p in packages if p in pip_only_packages]
             lines += ["    - -e ."]
-
-            f.write("\n".join(lines))
-
-    elif dependencies == "Pipfile":
-        with open(dependencies, "w") as f:
-            lines = ["[packages]"]
-            lines += [f'{p} = "*"' for p in sorted(packages)]
-
-            lines += [f'"{module_name}" ={{editable = true, path = "."}}']
-
-            lines += ["", "[requires]", f'python_version = "{python_version}"']
 
             f.write("\n".join(lines))

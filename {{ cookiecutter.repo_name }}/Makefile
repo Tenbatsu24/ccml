@@ -74,7 +74,7 @@ setup_hooks:
 		pre-commit install; \
 		pre-commit autoupdate --repo https://github.com/pre-commit/pre-commit-hooks; \
 		nbautoexport install; \
-		nbautoexport configure notebooks; \
+		nbautoexport configure notebooks --overwrite; \
 	else \
 		echo "Not inside a Git repository. Skipping pre-commit setup."; \
 	fi

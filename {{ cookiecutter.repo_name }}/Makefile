@@ -68,6 +68,22 @@ create_environment:
 {% endif %}
 
 
+## Activate python environment
+.PHONY: activate_environment
+activate_environment:
+	{% if cookiecutter.environment_manager == 'conda' -%}
+	conda activate $(PROJECT_NAME)
+	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
+	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; workon $(PROJECT_NAME); else workon.bat $(PROJECT_NAME); fi"
+	{% elif cookiecutter.environment_manager == 'pipenv' -%}
+	pipenv shell
+	{% endif %}
+
+
+.PHONY: env
+env: create_environment activate_environment requirements
+
+
 .PHONY: setup_hooks
 setup_hooks:
 	@if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then \

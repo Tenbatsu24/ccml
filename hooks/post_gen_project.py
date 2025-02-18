@@ -12,10 +12,6 @@ from ccds.hook_utils.dependencies import basic, packages, scaffold, write_depend
 #
 packages_to_install = copy(packages)
 
-# {% if cookiecutter.dataset_storage.s3 %}
-packages_to_install += ["awscli"]
-# {% endif %} #
-
 # {% if cookiecutter.include_code_scaffold == "Yes" %}
 packages_to_install += scaffold
 # {% endif %}

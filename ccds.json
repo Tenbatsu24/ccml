@@ -13,6 +13,9 @@
         "requirements.txt",
         "environment.yml"
     ],
+    "dataset_storage": [
+        "none"
+    ],
     "pydata_packages": [
         "none",
         "basic"

@@ -1,12 +1,16 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v5.0.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: pretty-format-json
-  - repo: https://github.com/psf/black
-    rev: 22.10.0
+        args: [ '--autofix' ]
+  - repo: local
     hooks:
       - id: black
+        name: black
+        language: system
+        entry: make format
+        pass_filenames: false

@@ -2,7 +2,6 @@ packages = [
     "pip",
     "black",
     "flake8",
-    "isort",
     "python-dotenv",
     "pre-commit",
     "nbautoexport",
@@ -20,6 +19,7 @@ basic = [
     "einops",
     "opt_einsum",
     "wandb",
+    "-i https://download.pytorch.org/whl/cu126",
     "torch",
     "torchvision",
 ]
